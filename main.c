@@ -5,8 +5,11 @@
 #include <stdlib.h>
 
 int main() {
-    const char* font_path = "../noto-sans-tc.woff";
-    size_t decoded_len;
-    uint8_t *decoded_data;
-    decoded_data = decode_from_file_wrapped(font_path, &decoded_len);
+    const char *font_path = "../noto-sans-tc.woff";
+    Result *result = decode_from_file_wrapped(font_path);
+    if (result->error == DecodeError) {
+        destroy_buffer(result);
+    }
+    size_t buf_len = result->decoded_data_len;
+    destroy_buffer(result);
 }

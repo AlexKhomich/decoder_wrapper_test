@@ -12,4 +12,14 @@ add_executable(decoder_wrapper_test
         lib/include/WoffDecoder.h
         main.c)
 
-target_link_libraries(decoder_wrapper_test libwoffdecoder.so)
+if (UNIX AND NOT APPLE)
+    target_link_libraries(decoder_wrapper_test libwoffdecoder.so)
+endif ()
+
+if (APPLE)
+    target_link_libraries(decoder_wrapper_test libwoffdecoder.dylib)
+endif ()
+
+if (WIN32)
+    target_link_libraries(decoder_wrapper_test libwoffdecoder.dll)
+endif ()

@@ -8,9 +8,25 @@
 #ifndef WOFF_DECODER_WOFFDECODER_H
 #define WOFF_DECODER_WOFFDECODER_H
 
+typedef enum {
+    None,
+    DecodeError,
+    DataSourceIsEmpty,
+    OutBufferFull,
+    BuffError,
+    DecompressError,
+} Error;
 
-uint8_t* decode_from_file_wrapped(const char* path, size_t* decoded_buf_len);
+typedef struct {
+    uint8_t *decoded_data;
+    size_t decoded_data_len;
+    Error error;
+} Result;
 
-uint8_t* decode_from_data(const uint8_t *source_buf, size_t woff_data_size, size_t* decoded_buf_len);
+Result *decode_from_file_wrapped(const char *path);
+
+void destroy_buffer(Result *buff_data);
+
+Result *decode_from_data_wrapped(const uint8_t *source_buf, size_t woff_data_size);
 
 #endif //WOFF_DECODER_WOFFDECODER_H
