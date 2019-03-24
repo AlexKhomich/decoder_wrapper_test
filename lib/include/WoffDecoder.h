@@ -15,6 +15,10 @@ typedef enum {
     OutBufferFull,
     BuffError,
     DecompressError,
+    InvalidWoffSize,
+    InputBufferIsEmpty,
+    InvalidWoffSignature,
+    InvalidWoffStructure
 } Error;
 
 typedef struct {
@@ -25,8 +29,8 @@ typedef struct {
 
 Result *decode_from_file_wrapped(const char *path);
 
-void destroy_buffer(Result *buff_data);
-
 Result *decode_from_data_wrapped(const uint8_t *source_buf, size_t woff_data_size);
+
+void destroy_buffer(Result *buff_data);
 
 #endif //WOFF_DECODER_WOFFDECODER_H
