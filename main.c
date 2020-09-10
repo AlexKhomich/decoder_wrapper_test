@@ -25,7 +25,7 @@ inline static const char* to_string(Error err) {
 }
 
 void decode_to_file() {
-    const char* font_path = "../noto-sans-tc.ttf";
+    const char* font_path = "../noto-sans-tc.woff";
     const char* out_font_path = "../noto-sans-tc.ttf";
     FileRWResult* result = decode_file_to_file_wrapped(font_path, out_font_path);
     size_t buf_len;
